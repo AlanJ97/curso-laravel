@@ -4,21 +4,11 @@ Route::get('/', function () {
     return 'Home Course';
 });
 
-Route::get('/usuarios', function () {
-    return 'Home usuarios';
-});
-Route::get('/usuarios/nuevo', function () {
-    return 'Creando al usuario';
-});
-Route::get('/usuarios/{id}', function ($id) {
-    return 'Mostrando detalles del usuario : '.$id;
-})->where('id','[0-9]+');
+Route::get('/usuarios', 'UserController@index');
 
-Route::get('/saludo/{name}/{nickname?}', function ($name,$nickname=null) {
-    if($nickname){
-        return 'Tu nombre es : '.$name.' y tu apodo es '.$nickname;
-    }else{
-        return 'Tu nombre es '.$name;
-    }
-  
-});
+Route::get('/usuarios/nuevo', 'UserController@create');
+
+Route::get('/usuarios/{id}','UserController@show')
+    ->where('id','[0-9]+');
+
+Route::get('/saludo/{name}/{nickname?}', 'WelcomeUserController@index');

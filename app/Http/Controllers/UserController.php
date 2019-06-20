@@ -19,12 +19,14 @@ class UserController extends Controller
         }
       
         $title = "Listado de usuarios";
-        return view('users')
+        return view('users.index')
             ->with('users',$users)
             ->with('title',$title);
     }   
     public function show($id){
-        return 'Mostrando detalles del usuario : '.$id;
+        return view('users.show')
+            ->with('id',$id);
+        
     }   
     public function create(){
         return 'Creando al usuario';

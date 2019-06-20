@@ -30,7 +30,7 @@ class UsersModuleTest extends TestCase
     {
         $this->get('/usuarios/5')
             ->assertStatus(200)
-            ->assertSee('Mostrando detalles del usuario : 5');        
+            ->assertSee('Mostrando detalles del usuario :');        
     }
     public function test_if_new_user_page_loads()
     {

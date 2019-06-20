@@ -7,12 +7,17 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index(){
-        $users = [
-            'Alan',
-            'Jesús',
-            'Segundo',
-            'Nava'
-        ];
+        if(request()->has('empty')){
+            $users = [];
+        }else{
+            $users = [
+                'Alan',
+                'Jesús',
+                'Segundo',
+                'Nava'
+            ];
+        }
+      
         $title = "Listado de usuarios";
         return view('users')
             ->with('users',$users)

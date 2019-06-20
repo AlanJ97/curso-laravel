@@ -13,11 +13,18 @@ class UsersModuleTest extends TestCase
      *
      * @return void
      */
-    public function test_if_users_page_loads()
+    public function test_if_users_list_loads_with_data()
     {
         $this->get('/usuarios')
             ->assertStatus(200)
             ->assertSee('Home usuarios');        
+    }
+    public function test_if_users_list_is_empty()
+    {
+        $this->get('/usuarios?empty')
+            ->assertStatus(200)
+            ->assertSee('Home usuarios')
+            ->assertSee('La lista no tiene ningun dato');               
     }
     public function test_if_users_details_page_loads()
     {

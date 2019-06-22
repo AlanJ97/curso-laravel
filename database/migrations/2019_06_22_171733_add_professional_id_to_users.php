@@ -14,7 +14,7 @@ class AddProfessionalIdToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('profession_id');
+            $table->unsignedBigInteger('profession_id')->nullable();
             $table->foreign('profession_id')->references('id')->on('professions');
         });
     }

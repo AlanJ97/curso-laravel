@@ -12,10 +12,16 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+       // $prefesions = DB::select('SELECT id FROM professions WHERE title =  ? LIMIT 0,1',[ 'Desarrollador back-end']);
+        $professionId = DB::table('professions')
+            ->where('title','Desarrollador back-end')
+            ->value('id');
+       
         DB::table('users')->insert([
             'name'=>'Alan Jesús',
             'email'=>'alan02n@gmail.com',
             'password'=>bcrypt('laravel'),     
+            'profession_id'=>$professionId
         ]);
     }
 }

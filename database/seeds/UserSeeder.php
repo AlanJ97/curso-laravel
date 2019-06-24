@@ -20,7 +20,20 @@ class UserSeeder extends Seeder
             'name'=>'Alan Jesús',
             'email'=>'alan02n@gmail.com',
             'password'=>bcrypt('laravel'),     
+            'profession_id'=>$professionId,
+            'isAdmin'=> true,
+        ]);
+        User::create([
+            'name'=>'Alan Jesús Nava',
+            'email'=>'alan0297n@gmail.com',
+            'password'=>bcrypt('laravel'),     
             'profession_id'=>$professionId
+        ]);
+        User::create([
+            'name'=>'Alan Jesús Segundo',
+            'email'=>'alan029797n@gmail.com',
+            'password'=>bcrypt('laravel'),     
+            'profession_id'=>null
         ]);
     }
 }

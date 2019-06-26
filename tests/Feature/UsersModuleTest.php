@@ -1,13 +1,14 @@
 <?php
 
 namespace Tests\Feature;
-
+use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UsersModuleTest extends TestCase
 {
+    use RefreshDatabase;    
     /**
      * A basic feature test example.
      *
@@ -15,13 +16,17 @@ class UsersModuleTest extends TestCase
      */
     public function test_if_users_list_loads_with_data()
     {
+        factory(User::class)->create([
+            'name'=>'Joel'     
+        ]);
         $this->get('/usuarios')
             ->assertStatus(200)
-            ->assertSee('Home usuarios');        
+            ->assertSee('Joel');        
     }
     public function test_if_users_list_is_empty()
     {
-        $this->get('/usuarios?empty')
+        // DB::table('users')->truncate();
+        $this->get('/usuarios')
             ->assertStatus(200)
             ->assertSee('Home usuarios')
             ->assertSee('La lista no tiene ningun dato');               

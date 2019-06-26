@@ -6,7 +6,11 @@
     <ul>
         @foreach($users as $user)
         <li> {{$user->name}}, {{$user -> email}} </li>
-        @endforeach 
+        {{-- <a href="{{url('/usuarios/'.$user->id)}}">Ver detalles</a> --}}
+        {{-- <a href="{{action('UserController@show',['id'=>$user->id])}}">Ver detalles</a> --}}
+          <a href="{{route('users.show',['id'=>$user->id])}}">Ver detalles</a>
+        @endforeach
+         
     </ul>            
     @else
         <p>La lista no tiene ningun dato</p>

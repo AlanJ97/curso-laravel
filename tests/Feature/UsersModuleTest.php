@@ -31,11 +31,14 @@ class UsersModuleTest extends TestCase
             ->assertSee('Home usuarios')
             ->assertSee('La lista no tiene ningun dato');               
     }
-    public function test_if_users_details_page_loads()
+    public function test_it_displays_user_details()
     {
-        $this->get('/usuarios/5')
+        $user = factory(User::class)->crate([
+            'name'=>'Alan Jesús'
+        ]);
+        $this->get('/usuarios/'.$user->id)
             ->assertStatus(200)
-            ->assertSee('Mostrando detalles del usuario :');        
+            ->assertSee('Alan Jesús');        
     }
     public function test_if_new_user_page_loads()
     {

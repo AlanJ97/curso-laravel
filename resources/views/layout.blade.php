@@ -53,6 +53,8 @@
 <!-- Begin page content -->
 <main role="main" class="flex-shrink-0">
      <br>
+     <br>
+      <b>
         <div class="col-8">
             @yield('content')
         </div>

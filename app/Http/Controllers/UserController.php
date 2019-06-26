@@ -17,8 +17,10 @@ class UserController extends Controller
             ->with('title',$title);
     }   
     public function show($id){
+        $user = User::find($id);
+        
         return view('users.show')
-            ->with('id',$id);
+            ->with('user',$user);
         
     }   
     public function create(){

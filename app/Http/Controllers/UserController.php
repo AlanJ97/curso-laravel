@@ -16,8 +16,8 @@ class UserController extends Controller
             ->with('users',$users)
             ->with('title',$title);
     }   
-    public function show($id){
-        $user = User::findOrFail($id);
+    public function show(User  $user){
+        // $user = User::findOrFail($id);
         // if($user == null){
         //     return  response()->view('errors.404',[],404);
         // }

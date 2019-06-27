@@ -30,12 +30,12 @@ class UserController extends Controller
     }
     public function store(){
         $data = request()->all();
-        dd($data);
-        User:create([
+        // dd($data);
+        User::create([
             'name'=>$data['name'],
             'email'=>$data['email'],
             'password'=>bcrypt($data['password'])    
         ]);
-        return redirect()->route('users.index');
+        return redirect()->route('users');
     }
 }

@@ -33,7 +33,7 @@ class UsersModuleTest extends TestCase
     }
     public function test_it_displays_user_details()
     {
-        $user = factory(User::class)->crate([
+        $user = factory(User::class)->create([
             'name'=>'Alan Jesús'
         ]);
         $this->get('/usuarios/'.$user->id)

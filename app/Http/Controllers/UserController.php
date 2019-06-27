@@ -29,6 +29,13 @@ class UserController extends Controller
         return view('users.create');
     }
     public function store(){
-        return 'Procesando información';
+        $data = request()->all();
+        dd($data);
+        User:create([
+            'name'=>$data['name'],
+            'email'=>$data['email'],
+            'password'=>bcrypt($data['password'])    
+        ]);
+        return redirect()->route('users.index');
     }
 }

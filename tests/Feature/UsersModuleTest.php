@@ -135,4 +135,55 @@ class UsersModuleTest extends TestCase
             'password'=>'123456'
         ]);
     }
+    public function test_the_name_is_required_when_updating_a_user(){
+        $user = factory(User::class)->create();
+        $this->from("usuarios/{$user->id}")
+            ->put("usuarios/{$user->id}",[
+                'name'=>'',
+                'email'=>'alan02n@gmail.com',
+                'password'=>'123456'
+            ])->assertRedirect("usuarios/{$user->id}/editar")
+                ->assertSessionHasErrors(['name']);
+        $this->assertDatabaseMissing('users',['email'=>'alan02n@gmail.com']);    
+    }
+
+    
+  
+    public function test_the_email_is_required_when_updating_the_use(){
+        $user = factory(User::class)->create();
+        $this->from("usuarios/{$user->id}")
+            ->put("usuarios/{$user->id}",[
+                'name'=>'Alan Jesus',
+                'email'=>'correo-no-valido',
+                'password'=>'123456'
+            ])->assertRedirect("usuarios/{$user->id}/editar")
+                ->assertSessionHasErrors(['email']);
+        $this->assertDatabaseMissing('users',['name'=>'Alan Jesus']);    
+    }
+    public function test_the_email_must_be_unique_when_updating_the_user(){
+        self::markTestIncomplete();
+        return;
+        $user = factory(User::class)->create([
+            'email'=>'alan02n@gmail.com'
+        ]);
+        $this->from("usuarios/{$user->id}/editar")
+            ->put("usuarios/{$user->id}/editar",[
+                'name'=>'Alan',
+                'email'=>'alan02n@gmail.com',
+                'password'=>'123456'
+                ])->assertRedirect('usuarios/nuevo')
+                ->assertSessionHasErrors(['email']);
+        $this->assertEquals(1,User::count());    
+    }
+    public function test_the_password_is_required_when_updating_the_user(){
+        $user = factory(User::class)->create();
+        $this->from("usuarios/{$user -> id}/editar")
+                ->put("usuarios/{$user -> id}",[
+                'name'=>'Alan',
+                'email'=>'alan02n@gmail.com',
+                'password'=>''
+            ])->assertRedirect("usuarios/{$user -> id}/editar")
+                ->assertSessionHasErrors(['password']);
+        $this-> assertDatabaseMissing('users',['email'=>'alan02n@gmail.com']);    
+    }
 }

@@ -17,7 +17,8 @@
     </div>
     
 @endif
-<form action="{{url('usuarios/crear')}}" method="post">
+<form action="{{url("usuarios/{$user->id}")}}" method="post">
+    {{ method_field('PUT')}}
     {!! csrf_field()!!}
     <label for="nombre">Nombre</label>
     <input type="text" name="name" id="name" value="{{old('name',$user->name)}}">

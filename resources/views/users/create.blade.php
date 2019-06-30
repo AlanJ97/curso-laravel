@@ -7,13 +7,13 @@
     <p>¡Hay errores!</p>
     <div class="alert alert-danger">
         <h6>Por favor corrige lo siguiente:</h6>
-        {{-- <ul>
+        <ul>
             @foreach ($errors->all() as $error)
                 <li>
                     {{$error}}
                 </li>     
             @endforeach
-        </ul>     --}}
+        </ul>    
     </div>
     
 @endif
@@ -21,9 +21,7 @@
     {!! csrf_field()!!}
     <label for="nombre">Nombre</label>
     <input type="text" name="name" id="name" value="{{old('name')}}">
-    @if ($errors -> has('name'))
-        <p>{{$errors -> first('name')}}</p>        
-    @endif
+    
     <br>
     <label for="email">Email</label>
     <input type="email" name="email" id="email" value="{{old('email')}}">

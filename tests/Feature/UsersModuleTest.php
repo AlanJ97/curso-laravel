@@ -175,15 +175,23 @@ class UsersModuleTest extends TestCase
                 ->assertSessionHasErrors(['email']);
         $this->assertEquals(1,User::count());    
     }
-    public function test_the_password_is_required_when_updating_the_user(){
-        $user = factory(User::class)->create();
+    public function test_the_password_is_optional_when_updating_the_user(){
+        $old_password = 'CLAVE ANTERIOR';
+        $user = factory(User::class)->create([
+            'password'=> bcrypt($old_password)
+        ]);
+    
         $this->from("usuarios/{$user -> id}/editar")
                 ->put("usuarios/{$user -> id}",[
                 'name'=>'Alan',
                 'email'=>'alan02n@gmail.com',
                 'password'=>''
-            ])->assertRedirect("usuarios/{$user -> id}/editar")
-                ->assertSessionHasErrors(['password']);
-        $this-> assertDatabaseMissing('users',['email'=>'alan02n@gmail.com']);    
+            ])->assertRedirect("usuarios/{$user -> id}");
+        $this-> assertCredentials([
+            'name'=>'Alan Jesus',
+            'email'=>'alan02n@gmail.com',
+            'password'=>$old_password
+
+        ]);    
     }
 }

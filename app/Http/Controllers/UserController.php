@@ -54,7 +54,12 @@ class UserController extends Controller
             'email'=>'required|email',
             'password'=>'required',
         ]);
-        $data['password'] = bcrypt($data['password']);
+        if($data['password']!=null){
+            $data['password'] = bcrypt($data['password']);
+        }else{
+            unset($data['password']);
+        }
+       
         $user->update($data);
         return redirect()->route('users.show',['user'=>$user]);
     }
